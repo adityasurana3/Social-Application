@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6(@&)x50ng0210yv0h_68po6rwm7-rl7##b2!y0ccn@_4tii9d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -101,8 +103,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-'django.contrib.auth.backends.ModelBackend',
-'account.authentication.EmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.google.GoogleOAuth2',
 ]
 
 # Internationalization
@@ -137,3 +142,26 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Twitter Setting
+# SOCIAL_AUTH_TWITTER_KEY = 'cFJu1gHiACZQR0qist8fBajp3' # Twitter API Key
+# SOCIAL_AUTH_TWITTER_SECRET = '3czHqAv57vkJcdG9OjIgs6JcNtL18PRhkq8CNBnMc9QkAhFNX7' # Twitter API Secret
+# BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAALOOqwEAAAAA80KuZgMn%2FXRDqlG%2BlH9MO6f9y8M%3DrCwwhIBtRs1kKVkZdCwkHfyaZLzhQ59SvdKIpItjQWV1CJJbWJ'
+# CLIENT_ID = 'SUZYUHVxdk1OOGg4bXN5UzNZWUI6MTpjaQ'
+# CLIENT_SECRET = 'KtJfaX8lPAolAI7qfDDyqLJoHRmR8tjuZCOyGxQFbDZ8yR4JN_'
+# Google configuration
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '364476625540-1m851fi0v9b8sukn3chdibj44vpas1oj.apps.googleusercontent.com' # Google Client ID
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Client Secret
+
+SOCIAL_AUTH_PIPELINE = [
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'account.authentication.create_profile',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+]
