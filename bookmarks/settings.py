@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django_extensions',
+    'images',
 ]
 
 MIDDLEWARE = [
@@ -144,14 +149,14 @@ LOGOUT_URL = 'logout'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Twitter Setting
-# SOCIAL_AUTH_TWITTER_KEY = 'cFJu1gHiACZQR0qist8fBajp3' # Twitter API Key
-# SOCIAL_AUTH_TWITTER_SECRET = '3czHqAv57vkJcdG9OjIgs6JcNtL18PRhkq8CNBnMc9QkAhFNX7' # Twitter API Secret
-# BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAALOOqwEAAAAA80KuZgMn%2FXRDqlG%2BlH9MO6f9y8M%3DrCwwhIBtRs1kKVkZdCwkHfyaZLzhQ59SvdKIpItjQWV1CJJbWJ'
-# CLIENT_ID = 'SUZYUHVxdk1OOGg4bXN5UzNZWUI6MTpjaQ'
-# CLIENT_SECRET = 'KtJfaX8lPAolAI7qfDDyqLJoHRmR8tjuZCOyGxQFbDZ8yR4JN_'
+SOCIAL_AUTH_TWITTER_KEY = os.getenv('SOCIAL_AUTH_TWITTER_KEY') # Twitter API Key
+SOCIAL_AUTH_TWITTER_SECRET = os.getenv('SOCIAL_AUTH_TWITTER_SECRET') # Twitter API Secret
+BEARER_TOKEN = os.getenv('BEARER_TOKEN')
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 # Google configuration
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '364476625540-1m851fi0v9b8sukn3chdibj44vpas1oj.apps.googleusercontent.com' # Google Client ID
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Client Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY') # Google Client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET') # Google Client Secret
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
