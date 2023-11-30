@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static thumbnail %}
+
+{% block title %}People{% endblock title %}
+
+{% block content %}
+    <h1>People</h1>
+    <div id="people-list">
+        {% for user in users %}
+            <div class="user">
+                <a href="{{user.get_absolute_url}}"><img src={% if user.profile.photo %}'{% thumbnail user.profile.photo 180x180 %}' {% else %}"{% static 'images/profile_image.jpg' %}"{% endif %}></a>
+                <div class="info">
+                    <a href="{{user.get_absolute_url}}" class="title">
+                        {% if user.get_full_name %}
+                            {{user.get_full_name}}
+                        {% else %}
+                            {{user.username}}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
