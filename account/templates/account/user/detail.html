@@ -12,6 +12,7 @@
     <span class="count">
         <span class="total">{{total_followers}}</span> follower{{total_followers|pluralize}}
     </span>
+    {% comment %} {% if not request.user.username == user.username %} {% endcomment %}
     <a href="#" data-id="{{user.id}}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
         {% if request.user not in user.followers.all %}
             Follow 
@@ -19,6 +20,7 @@
             Unfollow
         {% endif %}
     </a>
+    {% comment %} {% endif %} {% endcomment %}
     <div id="image-list" class="image-container">
         {% include "images/image/list_images.html" with images=user.images_created.all %}
     </div>
