@@ -36,7 +36,7 @@ from actions.models import Action
 @login_required
 def dashboard(request):
     actions = Action.objects.exclude(user=request.user)
-    following_ids = request.user.followwing.value_list('id', flat=True)
+    following_ids = request.user.following.values_list('id', flat=True)
     if following_ids:
         actions = actions.filter(user_id__in=following_ids)
     actions = actions[:10]
