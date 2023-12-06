@@ -180,6 +180,12 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
 }
 
+# Django debugger tool
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+# REDIS Configuration
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
